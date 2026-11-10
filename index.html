@@ -854,13 +854,12 @@ document.getElementById("general-search-input").value = "";
 refreshFloating();  
 window.scrollTo({ top: 0, behavior: "smooth" });  
 }  
-async function handleGeneralSearch(query, keepScroll) {  
+function handleGeneralSearch(query, keepScroll) {  
 query = (query || "").trim();  
 if (!query) {  
-if (window.searchMode) showHome();  
+showHome();  
 return;  
 }  
-await fetchSheetProducts();  
 let allProds = [];  
 for (let cat in dynamicCategoryProducts) {  
 allProds = allProds.concat(dynamicCategoryProducts[cat]);  
@@ -884,7 +883,7 @@ let products = dynamicCategoryProducts[window.activeCategoryName] || [];
 let filtered = products.filter(p => matchQuery(p.name, query));  
 renderProductsGrid(filtered);  
 }  
-async function openCategory(categoryName, keepScroll) {  
+function openCategory(categoryName, keepScroll) {  
 closeProductModal();  
 window.searchMode = false;  
 window.activeCategoryName = categoryName;  
@@ -894,9 +893,7 @@ document.getElementById("category-title").innerText = categoryName;
 document.getElementById("category-search-input").value = "";  
 document.getElementById("products-grid").innerHTML = "";  
   
-// جلب أحدث المنتجات من الشيت فوراً عند فتح القسم  
-await fetchSheetProducts();  
-  
+// العرض الفوري بأجزاء من الثانية من الذاكرة المحلية  
 let products = dynamicCategoryProducts[categoryName] || [];  
 renderProductsGrid(products);  
 refreshFloating();  
