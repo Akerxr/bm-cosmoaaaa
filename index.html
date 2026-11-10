@@ -96,23 +96,23 @@ setTimeout(removeLoader, 500);
 </div>  
 <div class="categories-grid" id="categories-grid-box">  
 <div class="category-card" onclick="openCategory('Skin Care')">  
-<img src="https://i.postimg.cc/W49wmhc9/IMG-1049.jpg" alt="Skin Care">  
+<img src="https://i.postimg.cc/Pr2ktPfP/skin-care.jpg" alt="Skin Care">  
 <div class="category-name">Skin Care</div>  
 </div>  
 <div class="category-card" onclick="openCategory('Hair Care')">  
-<img src="https://i.postimg.cc/m2xNyvJd/IMG-1050.jpg" alt="Hair Care">  
+<img src="https://i.postimg.cc/Qx0rXHNV/hair-care.jpg" alt="Hair Care">  
 <div class="category-name">Hair Care</div>  
 </div>  
 <div class="category-card" onclick="openCategory('Body Care')">  
-<img src="https://i.postimg.cc/15p0CWZ6/IMG-1051.jpg" alt="Body Care">  
+<img src="https://i.postimg.cc/sDwRVvfB/body-care.jpg" alt="Body Care">  
 <div class="category-name">Body Care</div>  
 </div>  
 <div class="category-card" onclick="openCategory('Kids')">  
-<img src="https://i.postimg.cc/SKtc23cC/IMG-1052.jpg" alt="Kids">  
+<img src="https://i.postimg.cc/J4PW1G74/kids.jpg" alt="Kids">  
 <div class="category-name">Kids</div>  
 </div>  
 <div class="category-card" onclick="openCategory('Korean')">  
-<img src="https://i.postimg.cc/Bvw2Lk2k/IMG-1053.jpg" alt="Korean">  
+<img src="https://i.postimg.cc/QxX3GpDN/korean.jpg" alt="Korean">  
 <div class="category-name">Korean</div>  
 </div>  
 </div>  
@@ -893,7 +893,6 @@ document.getElementById("category-title").innerText = categoryName;
 document.getElementById("category-search-input").value = "";  
 document.getElementById("products-grid").innerHTML = "";  
   
-// العرض الفوري بأجزاء من الثانية من الذاكرة المحلية  
 let products = dynamicCategoryProducts[categoryName] || [];  
 renderProductsGrid(products);  
 refreshFloating();  
