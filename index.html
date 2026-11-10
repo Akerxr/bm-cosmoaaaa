@@ -717,9 +717,8 @@ const initialStaticProducts = {
 "Body Care": []  
 };  
 let dynamicCategoryProducts = JSON.parse(JSON.stringify(initialStaticProducts));  
-let isSheetFetched = false;  
+
 async function fetchSheetProducts() {  
-if (isSheetFetched) return;  
 try {  
 const res = await fetch(API_URL);  
 const sheetData = await res.json();  
@@ -743,12 +742,12 @@ category: cat
 }  
 });  
 dynamicCategoryProducts = tempCat;  
-isSheetFetched = true;  
 }  
 } catch (err) {  
 console.error("Error loading sheet products:", err);  
 }  
 }  
+
 function similarityScore(s1, s2) {  
 let longer = s1, shorter = s2;  
 if (s1.length < s2.length) { longer = s2; shorter = s1; }  
@@ -885,7 +884,7 @@ let products = dynamicCategoryProducts[window.activeCategoryName] || [];
 let filtered = products.filter(p => matchQuery(p.name, query));  
 renderProductsGrid(filtered);  
 }  
-function openCategory(categoryName, keepScroll) {  
+async function openCategory(categoryName, keepScroll) {  
 closeProductModal();  
 window.searchMode = false;  
 window.activeCategoryName = categoryName;  
@@ -894,15 +893,14 @@ document.getElementById("products-page").style.display = "block";
 document.getElementById("category-title").innerText = categoryName;  
 document.getElementById("category-search-input").value = "";  
 document.getElementById("products-grid").innerHTML = "";  
+  
+// جلب أحدث المنتجات من الشيت فوراً عند فتح القسم  
+await fetchSheetProducts();  
+  
 let products = dynamicCategoryProducts[categoryName] || [];  
 renderProductsGrid(products);  
 refreshFloating();  
 if (!keepScroll) window.scrollTo({ top: 0, behavior: "smooth" });  
-fetchSheetProducts().then(() => {  
-if (window.activeCategoryName === categoryName) {  
-renderProductsGrid(dynamicCategoryProducts[categoryName] || []);  
-}  
-});  
 }  
 function renderProductsGrid(products) {  
 currentProducts = products;  
