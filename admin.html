@@ -222,7 +222,7 @@ if (sessionStorage.getItem("admin_auth") === "1") {
   window.addEventListener("DOMContentLoaded", loadProducts);
 }
 
-// ضغط الصورة وتحويلها لـ Base64 بحجم صغير جداً لضمان حفظها في الشيت فوراً بدون مشاكل
+// ضغط الصورة وتحويلها لـ Base64 بحجم وجودة عالية لضمان الوضوح العالي HD
 function compressAndConvertImage(input) {
   const file = input.files[0];
   if (!file) return;
@@ -237,8 +237,8 @@ function compressAndConvertImage(input) {
     img.src = e.target.result;
     img.onload = function() {
       const canvas = document.createElement("canvas");
-      const MAX_WIDTH = 300;
-      const MAX_HEIGHT = 300;
+      const MAX_WIDTH = 1000;
+      const MAX_HEIGHT = 1000;
       let width = img.width;
       let height = img.height;
 
@@ -259,10 +259,10 @@ function compressAndConvertImage(input) {
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0, width, height);
 
-      // ضغط الجودة لـ 0.7 لضمان سرعة وحجم خفيف جداً يتخزن في الشيت بسلاسة
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+      // جودة 0.90 للحصول على جودة عالية جداً ونقاء ألوان ممتاز
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.90);
       document.getElementById("prod-image-url").value = dataUrl;
-      status.innerText = "✓ تمت معالجة وضغط الصورة بنجاح!";
+      status.innerText = "✓ تمت معالجة الصورة بجودة عالية بنجاح!";
       status.style.color = "#2e7d32";
     };
   };
