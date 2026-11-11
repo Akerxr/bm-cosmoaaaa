@@ -60,7 +60,8 @@ setTimeout(removeLoader, 500);
 </a>  
 <ul class="nav-links">  
 <li><a href="#" onclick="showHome(); return false;" data-translate="home">الرئيسية</a></li>  
-<li><a href="#categories" onclick="showHome();" data-translate="products">المنتجات</a></li>  
+<li><a href="#categories" onclick="showHome();" data-translate="products">المنتجات</a></li>
+<li><a href="#policies-section" onclick="showHome();" data-translate="policiesNav">السياسات والقواعد</a></li>  
 <li><a href="#footer" data-translate="contact">تواصل معنا</a></li>  
 </ul>  
 <div class="nav-actions">  
@@ -215,6 +216,15 @@ setTimeout(removeLoader, 500);
 <button class="add-cart-btn" id="modal-add-btn" onclick="addFromModal(this)"></button>  
 </div>  
 </div>  
+
+<section class="section policies-section" id="policies-section" style="padding: 40px 0; background: #ffffff; border-top: 1px solid rgba(197,160,89,.15);">
+<div class="container" style="max-width: 900px;">
+<h2 class="section-title" data-translate="policiesTitle" style="margin-bottom: 25px;">قواعد التسوق والسياسات</h2>
+<div id="policies-content" style="line-height: 1.8; color: #444; font-size: 14.5px; background: #fffafb; padding: 25px; border-radius: 15px; border: 1px solid #ead9df; box-shadow: var(--shadow);">
+</div>
+</div>
+</section>
+
 <footer id="footer">  
 <img class="footer-logo" src="https://i.postimg.cc/Vvv9H1mc/IMG-1048.png" alt="BM cosmetics">  
 <div class="footer-name">BM cosmetics 🎀</div>  
@@ -666,7 +676,9 @@ namePlaceholder: "اكتب اسمك",
 phonePlaceholder: "اكتب رقم الهاتف",  
 addressPlaceholder: "اكتب العنوان بالتفصيل",  
 searchResults: "نتائج البحث",  
-noResults: "لا توجد منتجات مطابقة للبحث"  
+noResults: "لا توجد منتجات مطابقة للبحث",
+policiesNav: "السياسات والقواعد",
+policiesTitle: "قواعد التسوق والسياسات"  
 },  
 en: {  
 home: "Home",  
@@ -699,7 +711,9 @@ namePlaceholder: "Enter your name",
 phonePlaceholder: "Enter your phone number",  
 addressPlaceholder: "Enter your full address",  
 searchResults: "Search Results",  
-noResults: "No matching products found"  
+noResults: "No matching products found",
+policiesNav: "Policies & Rules",
+policiesTitle: "Shopping Rules & Policies"  
 }  
 };  
 let currentLang = "ar";  
@@ -837,7 +851,8 @@ if (modalProduct) {
 document.getElementById("modal-add-btn").innerHTML =  
 '<i class="fa-solid fa-cart-plus"></i> ' + translations[currentLang].addToCart;  
 }  
-updateCart();  
+updateCart();
+updatePoliciesLanguage();  
 }  
 function hideAllPages() {  
 document.getElementById("home-page").style.display = "none";  
@@ -1075,9 +1090,47 @@ const message = "مرحباً، اريد طلب المنتجات الآتية:\n
 const whatsappUrl = "https://wa.me/201099872665?text=" + encodeURIComponent(message);  
 window.open(whatsappUrl, "_blank");  
 }  
+
+function updatePoliciesLanguage() {
+  const elem = document.getElementById("policies-content");
+  if (!elem) return;
+  if (currentLang === "ar") {
+    elem.innerHTML = `<div style="font-weight: 800; font-size: 18px; color: var(--deep-pink); margin-bottom: 15px; text-align: center;">BM Cosmetics 🎀</div>
+<div style="font-weight: 700; font-size: 16px; margin-bottom: 20px; text-align: center;">قواعد التسوق والسياسات</div>
+<ol style="padding-right: 20px; padding-left: 0; display: flex; flex-direction: column; gap: 12px;">
+<li><b>تأكيد الطلبات:</b> يتم تأكيد الأوردر بدفع عربون 50% من إجمالي قيمة الطلب، ويتم دفع المبلغ المتبقي عند الاستلام.</li>
+<li><b>التوصيل:</b> تختلف مصاريف ومدة التوصيل حسب المنطقة.</li>
+<li><b>الاستبدال والاسترجاع:</b> لا يمكن استرجاع أو استبدال المنتجات المفتوحة أو المستخدمة، مع مراعاة حقوق المستهلك المقررة قانونًا. في حالة استلام منتج تالف أو غير مطابق للطلب، يُرجى التواصل معانا في أسرع وقت.</li>
+<li><b>إلغاء الطلبات:</b> إمكانية إلغاء الأوردر بتعتمد على مرحلة التجهيز أو الشحن، لذلك يُرجى التواصل معانا في أسرع وقت.</li>
+<li><b>العروض والخصومات:</b> تسري العروض خلال المدة المحددة لها، وتخضع لتوافر المنتجات.</li>
+<li><b>تنويه بخصوص العناية بالبشرة:</b> يُرجى مراجعة مكونات المنتجات قبل الاستخدام، لأن النتائج بتختلف حسب نوع البشرة وطبيعتها.</li>
+<li><b>خدمة العملاء:</b> لأي استفسارات أو مساعدة، تقدري تتواصلي معانا من خلال قنوات التواصل الرسمية.</li>
+</ol>
+<div style="text-align: center; margin-top: 25px; font-weight: 700; color: var(--deep-pink);">♡ شكرًا لثقتكم في BM Cosmetics — خليكي دايمًا متألقة! ♡</div>`;
+    elem.dir = "rtl";
+    elem.style.textAlign = "right";
+  } else {
+    elem.innerHTML = `<div style="font-weight: 800; font-size: 18px; color: var(--deep-pink); margin-bottom: 15px; text-align: center;">BM Cosmetics 🎀</div>
+<div style="font-weight: 700; font-size: 16px; margin-bottom: 20px; text-align: center;">Shopping Rules & Policies</div>
+<ol style="padding-left: 20px; padding-right: 0; display: flex; flex-direction: column; gap: 12px;">
+<li><b>Order Confirmation:</b> All orders require a 50% deposit of the total order value for confirmation. The remaining balance is paid upon delivery.</li>
+<li><b>Delivery:</b> Delivery fees and estimated delivery times vary depending on your location.</li>
+<li><b>Returns & Exchanges:</b> Opened or used products cannot be returned or exchanged, subject to applicable consumer protection laws. If you receive a damaged or incorrect item, please contact us promptly.</li>
+<li><b>Order Cancellation:</b> Cancellations depend on the order’s preparation or shipping status. Please contact us as soon as possible.</li>
+<li><b>Offers & Discounts:</b> All offers are valid for the specified period and are subject to product availability.</li>
+<li><b>Skincare Disclaimer:</b> Please check product ingredients before use. Results may vary depending on your skin type and condition.</li>
+<li><b>Customer Support:</b> For any inquiries or assistance, please contact us through our official channels.</li>
+</ol>
+<div style="text-align: center; margin-top: 25px; font-weight: 700; color: var(--deep-pink);">♡ Thank you for choosing BM Cosmetics. Your glow, our passion! ♡</div>`;
+    elem.dir = "ltr";
+    elem.style.textAlign = "left";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {  
 try { applyPlaceholders(); } catch (e) { console.error(e); }  
-try { updateCart(); } catch (e) { console.error(e); }  
+try { updateCart(); } catch (e) { console.error(e); }
+try { updatePoliciesLanguage(); } catch (e) { console.error(e); }  
 fetchSheetProducts();  
 });  
 </script>  
